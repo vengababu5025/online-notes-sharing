@@ -194,14 +194,17 @@
         function displayUserInfo() {
             const userInfo = document.getElementById('userInfo');
             if (userData) {
-                const initials = userData.details.name;
-                
                 userInfo.innerHTML = `
-                    <div class="user-avatar"></div>
-                    <span>${userData.details.name}(${userData.details.department})</span>
+                    <div class="user-avatar">${getInitials(userData.details.name)}</div>
+                    <span>${userData.details.name} (${userData.details.department})</span>
                     <button class="logout-btn" onclick="logout()">Logout</button>
                 `;
             }
+        }
+
+        // Helper function to get initials from name
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('').toUpperCase();
         }
 
         async function fetchUploadedFiles() {
