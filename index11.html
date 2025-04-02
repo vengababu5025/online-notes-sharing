@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Downloads - Notes Hub</title>
+    <style>
+        body {
+            background-color: #A5B4FC;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            background-color: #37276D;
+            padding: 20px;
+        }
+        .title {
+            margin-top: 100px;
+            font-size: 24px;
+            font-weight: bold;
+            align-self: flex-start;
+            margin-left: 20px;
+        }
+        .downloads-container {
+            width: 60%;
+        }
+        .download-box {
+            background-color: white;
+            color: #44318D;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .download-details {
+            flex: 1;
+        }
+        .icon-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .icon-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            color: #44318D;
+            transition: transform 0.2s ease-in-out;
+        }
+        .icon-button:hover {
+            color: #37276D;
+            transform: scale(1.2);
+        }
+        @media (max-width: 768px) {
+            .downloads-container {
+                width: 90%;
+            }
+            .icon-button {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">Notes Hub</div>
+    
+    <div class="title">My Downloads</div>
+    
+    <div class="downloads-container" id="downloads-list">
+        <!-- Downloaded notes will be dynamically added here -->
+    </div>
+
+    <script>
+        const userData = JSON.parse(sessionStorage.getItem("LoggedInUser"));
+        console.log("Logged-in user:", userData.details.name); // Debug: Check if user is set
+    
+        if (!userData.details.name) {
+            window.location.href = "/login.html"; // Redirect if not logged in
+        }
+    
+        async function loadDownloads() {
+            const container = document.getElementById('downloads-list');
+            container.innerHTML = ''; // Clear previous content
+    
+            try {
+                const response = await fetch(`http://localhost:5062/api/OnlineSharing/GetDownloadsByUser/${userData.details.name}`);
+                if (response.ok) {
+                    const downloads = await response.json();
+                    console.log("API Response:", downloads); // Debug: Check API data
+    
+                    if (downloads.length === 0) {
+                        container.innerHTML = '<p>No downloads found.</p>';
+                        return;
+                    }
+    
+                    downloads.forEach(note => {
+                        const noteBox = document.createElement('div');
+                        noteBox.className = 'download-box';
+                        noteBox.innerHTML = `
+                            <div class="download-details">
+                                <h3>${note.title}</h3>
+                                <p><strong>Teacher:</strong> ${note.teacher}</p>
+                                <p><strong>Branch:</strong> ${note.branch}</p>
+                            </div>
+                            <div class="icon-buttons">
+                                <button class="icon-button" onclick="downloadNote('${note.fileName}')">📄</button>
+                                <button class="icon-button">❤️</button>
+                            </div>
+                        `;
+                        container.appendChild(noteBox);
+                    });
+                } else {
+                    const error = await response.json();
+                    alert(`Error: ${error.message}`);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert("An error occurred while fetching downloads.");
+            }
+        }
+    
+        function downloadNote(fileName) {
+            window.open(`http://localhost:5062/api/OnlineSharing/GetFile/${fileName}?user=${userData.details.name}`, '_blank');
+        }
+    
+        window.onload = loadDownloads;
+    </script>
+</body>
+</html>

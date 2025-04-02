@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Profile - Notes Hub</title>
+    <style>
+         body {
+            background-color: #A5B4FC;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #37276D;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+        .nav-link:hover {
+            background-color: #5a42b3;
+        }
+        .nav-link.active {
+            background-color: #44318D;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #A5B4FC;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #37276D;
+        }
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 15px;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+        .logout-btn:hover {
+            background-color: #5a42b3;
+        }
+
+        .profile-icon {
+            font-size: 32px;
+            cursor: pointer;
+            color: #D3D3D3;
+            background-color: white;
+            border-radius: 50%;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            margin-right: 20px;
+        }
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            gap: 50px;
+            margin-top: 80px;
+        }
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: white;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            color: #44318D;
+            font-weight: bold;
+            flex-direction: column;
+            text-decoration: none;
+        }
+        .box:hover {
+            transform: scale(1.05);
+        }
+    </style>
+    <script>
+        function logout() {
+            alert("Logging out...");
+        }
+
+        function openTeacherProfile() {
+            window.location.href = "edit-profile.html"; // Change this to the correct teacher profile page
+        }
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Notes Hub</div>
+        <div class="nav-container">
+            <div class="nav-links">
+                <a href="index4.html" class="nav-link active">Home</a>
+                <a href="index8.html" class="nav-link">Upload Notes</a>
+                <a href="index9.html" class="nav-link">View Notes</a>
+                <a href="login.html" class="nav-link">Logout</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <a href="index8.html" class="box">➕<br>Upload Notes</a>
+        <a href="index9.html" class="box">📄<br>View Notes</a>
+    </div>
+</body>
+</html>

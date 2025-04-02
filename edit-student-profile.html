@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #A5B4FC; /* Blue background */
+            color: white;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .profile-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+        .profile-container h1 {
+            margin-bottom: 20px;
+        }
+        .profile-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+        .notebook-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+        .save-button, .logout-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        .save-button {
+            background-color: #5A3FC1;
+            color: white;
+        }
+        .logout-button {
+            background-color: #ff4d4d;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h1><b>Edit Student Profile</b></h1>
+        <div class="notebook-icon">📓</div> <!-- Notebook Icon -->
+
+        <!-- Input Fields -->
+        <input type="text" id="name" placeholder="Name">
+        <input type="text" id="yearSemester" placeholder="Year/Semester">
+        <input type="text" id="branch" placeholder="Branch">
+        <input type="text" id="dob" placeholder="Date of Birth">
+
+        <!-- Buttons -->
+        <button class="save-button" onclick="saveChanges()">Save Changes</button>
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        function saveChanges() {
+            const name = document.getElementById('name').value;
+            const yearSemester = document.getElementById('yearSemester').value;
+            const branch = document.getElementById('branch').value;
+            const dob = document.getElementById('dob').value;
+
+            // Save logic (e.g., send data to a server or store locally)
+            console.log('Profile Saved:', { name, yearSemester, branch, dob });
+            alert('Changes saved successfully!');
+            window.location.href = 'student-profile.html'; // Redirect back to profile page
+        }
+
+        function logout() {
+            // Logout logic (e.g., redirect to login page)
+            console.log('User logged out');
+            alert('You have been logged out.');
+            window.location.href = 'first.html'; // Redirect to login page
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Login Page</title>
+    <style>
+        .error-message {
+            color: #ff4444;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .success-message {
+            color: #00C851;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="container">
+      <div class="sign-up">
+<!-- Sign Up Form -->
+<form id="signupForm">
+    <h1>Create Account</h1>
+    <input type="text" placeholder="Name" id="signupName" required />
+  
+    <select id="signupRole" name="role" required>
+      <option value="student">Student</option>
+      <option value="teacher">Teacher</option>
+    </select>
+  
+    <select id="signupDepartment" name="department" required>
+      <option value="">Select Department</option>
+      <option value="CSE">CSE</option>
+      <option value="ECE">ECE</option>
+      <option value="CIVIL">CIVIL</option>
+      <option value="MECH">MECH</option>
+    </select>
+  
+    <input type="text" id="signupIdField" placeholder="Student ID" required />
+    <input type="password" id="signupPassword" placeholder="Password" required />
+    <div id="signupMessage"></div>
+    <button type="submit">Sign Up</button>
+  </form>
+      </div>
+      <div class="sign-in">
+        <form id="signinForm">
+            <h1>Sign In</h1>
+            <span>No One Has The Right To Judge You</span>
+          
+            <select id="signinRole" name="role" required>
+              <option value="student">Student</option>
+              <option value="teacher">Teacher</option>
+            </select>
+          
+          
+            <input type="text" id="signinIdField" placeholder="Student ID" required />
+            <input type="password" id="signinPassword" placeholder="Password" required />
+            <div id="signinMessage"></div>
+            <button type="submit">Sign In</button>
+          </form>
+      </div>
+      <div class="toogle-container">
+        <div class="toogle">
+          <div class="toogle-panel toogle-left">
+            <h1>Welcome Back!</h1>
+            <p>If you already have an account</p>
+            <button class="hidden" id="login">Sign In</button>
+          </div>
+          <div class="toogle-panel toogle-right">
+            <h1>Hello, Friend!</h1>
+            <p>If you don't have an account</p>
+            <button class="hidden" id="register">Sign Up</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const container = document.getElementById('container');
+        const loginBtn = document.getElementById('login');
+        const registerBtn = document.getElementById('register');
+        const signinForm = document.getElementById('signinForm');
+        const signupForm = document.getElementById('signupForm');
+        const signinMessage = document.getElementById('signinMessage');
+        const signupMessage = document.getElementById('signupMessage');
+        
+        // Toggle between forms
+        loginBtn.addEventListener('click', () => container.classList.remove('active'));
+        registerBtn.addEventListener('click', () => container.classList.add('active'));
+        
+        // Update placeholders based on role selection
+        function updatePlaceholder() {
+            const signinRole = document.getElementById('signinRole').value;
+            const signupRole = document.getElementById('signupRole').value;
+            const signinIdField = document.getElementById('signinIdField');
+            const signupIdField = document.getElementById('signupIdField');
+            
+            if (signinRole === 'student') {
+                signinIdField.placeholder = 'Student ID';
+            } else {
+                signinIdField.placeholder = 'Teacher ID';
+            }
+            
+            if (signupRole === 'student') {
+                signupIdField.placeholder = 'Student ID';
+            } else {
+                signupIdField.placeholder = 'Teacher ID';
+            }
+        }
+        
+        // Initialize placeholders
+        updatePlaceholder();
+        
+        // Add event listeners for role changes
+        document.getElementById('signinRole').addEventListener('change', updatePlaceholder);
+        document.getElementById('signupRole').addEventListener('change', updatePlaceholder);
+        
+        // Handle sign in form submission
+// Handle sign in form submission
+// Handle sign in form submission
+signinForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const role = document.getElementById('signinRole').value;
+    const username = document.getElementById('signinIdField').value;
+    const password = document.getElementById('signinPassword').value;
+    
+    try {
+        // Determine the correct endpoint based on role
+        const endpoint = role === 'student' 
+            ? 'https://vengababu.bsite.net/api/OnlineSharing/StudentLogin' 
+            : 'https://vengababu.bsite.net/api/OnlineSharing/TeacherLogin';
+        
+        // Make API call
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                Username: username,
+                Password: password
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            // Login successful
+            signinMessage.textContent = data.message || 'Login successful! Redirecting...';
+            signinMessage.className = 'success-message';
+            
+            // Call the redirect function with role and user data
+            redirectToProfile(role, {
+                username: username,
+                details: data.data,
+                userType: role
+            });
+        } else {
+            // Login failed
+            signinMessage.textContent = data.message || 'Invalid credentials';
+            signinMessage.className = 'error-message';
+        }
+    } catch (error) {
+        console.error('Login error:', error);
+        signinMessage.textContent = 'An error occurred during login';
+        signinMessage.className = 'error-message';
+    }
+});
+
+// Redirect function as per your requirements
+function redirectToProfile(role, user) {
+    if (role === "student") {
+        sessionStorage.setItem("LoggedInUser", JSON.stringify(user));
+        window.location.href = "index5.html"; // Student Profile Page
+    } else if (role === "teacher") {
+        sessionStorage.setItem("LoggedInUser", JSON.stringify(user));
+        window.location.href = "index4.html"; // Teacher Profile Page
+    }
+}
+signupForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('signupName').value;
+    const role = document.getElementById('signupRole').value;
+    const username = document.getElementById('signupIdField').value;
+    const password = document.getElementById('signupPassword').value;
+    const department = document.getElementById('signupDepartment').value;
+
+    // Clear previous messages
+    signupMessage.textContent = '';
+    signupMessage.className = '';
+    
+    try {
+        // Determine the correct endpoint based on role
+        const endpoint = role === 'student' 
+            ? 'https://vengababu.bsite.net/api/OnlineSharing/StudentRegister' 
+            : 'https://vengababu.bsite.net/api/OnlineSharing/TeacherRegister';
+        
+        // Prepare the request body based on role
+        const requestBody = role === 'student' 
+            ? {
+                Name: name,
+                Role: role,
+                StudentId: username,
+                Password: password,
+                Department: department
+              }
+            : {
+                Name: name,
+                Role: role,
+                TeacherId: username,
+                Password: password,
+                Department: department
+              };
+        
+        // Make API call
+        const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestBody)
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+            // Registration successful
+            signupMessage.textContent = data.message || 'Registration successful! Please sign in.';
+            signupMessage.className = 'success-message';
+            
+            // Optionally auto-switch to login form
+            container.classList.remove('active');
+            
+            // Clear form
+            signupForm.reset();
+        } else {
+            // Registration failed
+            signupMessage.textContent = data.message || 'Registration failed';
+            signupMessage.className = 'error-message';
+        }
+    } catch (error) {
+        console.error('Registration error:', error);
+        signupMessage.textContent = 'An error occurred during registration';
+        signupMessage.className = 'error-message';
+    }
+});   </script>
+</body>
+</html>
+
+
+
+

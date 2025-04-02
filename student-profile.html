@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #A5B4FC; /* Blue background */
+            color: white;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .profile-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+        .profile-container h1 {
+            margin-bottom: 20px;
+        }
+        .profile-details {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .profile-details div {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .notebook-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+        .edit-button, .logout-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        .edit-button {
+            background-color: #5A3FC1;
+            color: white;
+        }
+        .logout-button {
+            background-color: #ff4d4d;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h1><b>Student Profile</b></h1>
+        <div class="notebook-icon">📓</div> <!-- Notebook Icon -->
+
+        <!-- Profile Details in Colored Boxes -->
+        <div class="profile-details">
+            <div><strong>Name:</strong> BALA AMMA</div>
+            <div><strong>Year/Semester:</strong> 2rd Year / 2th Semester</div>
+            <div><strong>Branch:</strong> Computer Science</div>
+            <div><strong>Date of Birth:</strong> 19/07/2005</div>
+        </div>
+
+        <!-- Buttons -->
+        <button class="edit-button" onclick="window.location.href='edit-student-profile.html'">Edit</button>
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        function logout() {
+            // Logout logic (e.g., redirect to login page)
+            console.log('User logged out');
+            alert('You have been logged out.');
+            window.location.href = 'first.html'; // Redirect to login page
+        }
+    </script>
+</body>
+</html>

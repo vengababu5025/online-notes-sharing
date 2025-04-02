@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #A5B4FC; /* Blue background */
+            color: white;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .profile-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+        .profile-container h1 {
+            margin-bottom: 20px;
+        }
+        .profile-details {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .profile-details div {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .social-links {
+            margin: 20px 0;
+        }
+        .social-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: white;
+        }
+        .social-links a:hover {
+            color: #00b4d8;
+        }
+        .edit-button, .logout-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        .edit-button {
+            background-color: #5A3FC1;
+            color: white;
+        }
+        .logout-button {
+            background-color: #ff4d4d;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h1><b>Profile</b></h1>
+
+        <!-- Profile Details in Colored Boxes -->
+        <div class="profile-details">
+            <div><strong>Name:</strong> BALA AMMA</div>
+            <div><strong>Teacher ID:</strong> T12345</div>
+            <div><strong>Branch:</strong> Computer Science</div>
+            <div><strong>Subject:</strong> Data Structures</div>
+        </div>
+
+        <!-- Bio Section -->
+        <div class="social-links">
+            <p>Follow for live classes:</p>
+            <a href="https://instagram.com/yourprofile" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" width="24">
+            </a>
+            <a href="https://youtube.com/yourchannel" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube" width="24">
+            </a>
+        </div>
+
+        <!-- Buttons -->
+        <button class="edit-button" onclick="window.location.href='edit-profile.html'">Edit</button>
+        <button class="logout-button" onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+        function logout() {
+            // Logout logic (e.g., redirect to login page)
+            console.log('User logged out');
+            alert('You have been logged out.');
+            window.location.href = 'first.html'; // Redirect to login page
+        }
+    </script>
+</body>
+</html>

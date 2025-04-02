@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #A5B4FC;
+        }
+        header {
+            background-color: #37276D;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            padding: 10px;
+        }
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #A5B4FC;
+        }
+        .hero {
+            background-image: url('hero-bg.jpg'); /* Add your background image here */
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        .hero h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+        }
+        .get-started-button {
+            background-color: #37276D;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .get-started-button:hover {
+            background-color: #6B5B95;
+        }
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            background-color: #fff;
+            padding: 50px 20px;
+            text-align: center;
+            flex-wrap: wrap;
+        }
+        .stats div {
+            flex: 1 1 200px;
+            margin: 10px;
+        }
+        .stats img {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .courses {
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .courses h1 {
+            font-size: 2em;
+            margin-bottom: 40px;
+            color: #37276D;
+        }
+        .course-list {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .course-list div {
+            flex: 1 1 200px;
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .course-list div:hover {
+            transform: translateY(-10px);
+        }
+        .course-list div h3 {
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        .uiux { background-color: #FF6B6B; }
+        .webdev { background-color: #4ECDC4; }
+        .digital { background-color: #FFD166; }
+        .practical { background-color: #6B5B95; }
+        footer {
+            background-color: #37276D;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>NOTE-HUB</h1>
+    </header>
+    <nav>
+        <a href="log.html">Login</a>  <!-- Linked to log.html -->
+        <a href="log.html">Register</a>  <!-- Linked to log.html -->
+        <a href="about.html">About Us</a> <!-- Link to about.html -->
+    </nav>
+    <section class="hero">
+        <h1>Investing in Knowledge and Your Future</h1>
+        <p>Our Note Hub programs have been developed to be a vehicle of delivering multimedia learning solutions for your students.</p>
+        <button class="get-started-button" onclick="window.location.href='log.html'">Get Started</button> <!-- Linked to log.html -->
+    </section>
+    <section class="stats">
+        <div>
+            <img src="pic1.jpg" alt="Learning Resources" class="image-box">
+        </div>
+        <div>
+            <img src="pic3.jpg" alt="Collaborative Learning" class="image-box">
+        </div>
+        <div>
+            <img src="pic2.jpg" alt="Study Materials" class="image-box">
+        </div>
+    </section>
+    <section class="courses">
+        <h1>Most Trending Subjects At Present Most Demanding, Hurry Up! Just Sign Up And Start Preparing</h1>
+        <div class="course-list">
+            <div class="uiux">
+                <h3>JAVA OPS</h3>
+            </div>
+            <div class="webdev">
+                <h3>NODE JS</h3>
+            </div>
+            <div class="digital">
+                <h3>DISCRETE MATHS</h3>
+            </div>
+            <div class="practical">
+                <h3>OPERATING SYSTEM</h3>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2025 Note Hub. All rights reserved.</p>
+    </footer>
+</body>
+</html>

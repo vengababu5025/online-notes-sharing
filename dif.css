@@ -1,0 +1,86 @@
+/* General Styles */
+body {
+  font-family: "Poppins", sans-serif;
+  background: #e0f7fa; /* Light Blue Background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* Container */
+.container {
+  width: 400px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+}
+
+/* Profile Header */
+.profile-header {
+  margin-bottom: 20px;
+}
+
+.profile-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #007bff;
+  text-align: center;
+}
+
+/* Profile Details */
+.profile-details {
+  text-align: left;
+}
+
+.detail-box {
+  border: 2px solid #007bff;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 15px;
+  background: #f1f8ff;
+}
+
+label {
+  font-weight: bold;
+  color: #007bff;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Logout Button */
+.logout-btn {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.logout-btn:hover {
+  background: #0056b3;
+}

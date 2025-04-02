@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Notes - Notes Hub</title>
+    <style>
+       body {
+            background-color: #A5B4FC;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: #37276D;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+        .nav-link:hover {
+            background-color: #5a42b3;
+        }
+        .nav-link.active {
+            background-color: #44318D;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: #A5B4FC;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #37276D;
+        }
+        .logout-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 15px;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+        .logout-btn:hover {
+            background-color: #5a42b3;
+        }
+        .title {
+            margin-top: 100px;
+            font-size: 24px;
+            font-weight: bold;
+            align-self: flex-start;
+            margin-left: 20px;
+        }
+        .downloads-container {
+            width: 60%;
+            background-color: white;
+            color: #44318D;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .notes-container {
+            width: 60%;
+            margin-bottom: 50px;
+        }
+        .note-box {
+            background-color: white;
+            color: #44318D;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .note-details {
+            flex: 1;
+        }
+        .note-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .icon-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            color: #44318D;
+        }
+        .icon-button:hover {
+            color: #37276D;
+        }
+        .no-data-message {
+            background-color: white;
+            color: #44318D;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Notes Hub</div>
+        <div class="nav-container">
+            <div class="nav-links">
+                <div class="nav-links">
+                    <a href="index4.html" class="nav-link">Home</a>
+                    <a href="index8.html" class="nav-link">Upload Notes</a>
+                    <a href="index9.html" class="nav-link active">View Notes</a>
+                </div>
+            </div>
+            <div class="user-info" id="userInfo">
+                <!-- User info will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="title">View Notes</div>
+    
+    <div class="downloads-container">
+        <h3>My Notes</h3>
+        <ul id="download-list"></ul>
+    </div>
+    
+    <div class="notes-container" id="notes-container">
+        <!-- Notes will be dynamically inserted here -->
+    </div>
+
+    <script>
+        // Display user information in header
+        function displayUserInfo(user) {
+            const userInfo = document.getElementById('userInfo');
+            if (user) {
+                const initials = user.details.name;
+                
+                userInfo.innerHTML = `
+                    <div class="user-avatar"></div>
+                    <span>${user.details.name}(${user.details.department})</span>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                `;
+            }
+        }
+
+        async function fetchUploadedFiles(faculty) {
+            try {
+                const response = await fetch(`https://vengababu.bsite.net/api/OnlineSharing/GetNotesByFaculty/${faculty}`);
+                if (response.ok) {
+                    const files = await response.json();
+                    displayUploadedFiles(files);
+                } else {
+                    const error = await response.json();
+                    alert(`Error: ${error.message}`);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert("An error occurred while fetching the files.");
+            }
+        }
+
+        function displayUploadedFiles(files) {
+            const notesContainer = document.getElementById('notes-container');
+            notesContainer.innerHTML = ''; // Clear previous content
+
+            if (!files || files.length === 0) {
+                // Display "No data found" message
+                const noDataMessage = document.createElement('div');
+                noDataMessage.className = 'no-data-message';
+                noDataMessage.textContent = 'No notes available';
+                notesContainer.appendChild(noDataMessage);
+                return;
+            }
+
+            files.forEach(file => {
+                const noteBox = document.createElement('div');
+                noteBox.className = 'note-box';
+
+                const noteDetails = document.createElement('div');
+                noteDetails.className = 'note-details';
+
+                const noteTitle = document.createElement('h3');
+                noteTitle.textContent = file.subject || 'No Subject';
+
+                const noteTeacher = document.createElement('p');
+                noteTeacher.innerHTML = `<strong>Teacher:</strong> ${file.faculty || 'Unknown'}`;
+
+                const noteBranch = document.createElement('p');
+                noteBranch.innerHTML = `<strong>Branch:</strong> ${file.branch || 'Unknown'}`;
+
+                const noteDescription = document.createElement('p');
+                noteDescription.innerHTML = `<strong>Description:</strong> ${file.description || 'No description available'}`;
+
+                noteDetails.appendChild(noteTitle);
+                noteDetails.appendChild(noteTeacher);
+                noteDetails.appendChild(noteBranch);
+                noteDetails.appendChild(noteDescription);
+
+                const noteActions = document.createElement('div');
+                noteActions.className = 'note-actions';
+
+                const downloadButton = document.createElement('button');
+                downloadButton.className = 'icon-button';
+                downloadButton.innerHTML = '⬇️';
+                downloadButton.onclick = () => downloadNote(file.fileName);
+
+
+                noteActions.appendChild(downloadButton);
+
+
+                noteBox.appendChild(noteDetails);
+                noteBox.appendChild(noteActions);
+
+                notesContainer.appendChild(noteBox);
+            });
+        }
+
+        function downloadNote(fileName) {
+            const userData = JSON.parse(sessionStorage.getItem("LoggedInUser"));
+            if (userData && userData.username) {
+                window.open(`https://vengababu.bsite.net/api/OnlineSharing/GetFile/${fileName}?user=${userData.details.name}`, '_blank');
+            } else {
+                alert("User information not available. Please login again.");
+                window.location.href = "/login.html";
+            }
+        }
+
+        function logout() {
+            sessionStorage.removeItem("LoggedInUser");
+            window.location.href = "/login.html";
+        }
+
+        // Check if user is logged in and load data
+        const userData = JSON.parse(sessionStorage.getItem("LoggedInUser"));
+        if (!userData || !userData.username) {
+            window.location.href = "/login.html"; // Redirect to login if not logged in
+        } else {
+            displayUserInfo(userData);
+            fetchUploadedFiles(userData.details.name);
+        }
+    </script>
+</body>
+</html>
