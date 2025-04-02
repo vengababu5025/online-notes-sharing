@@ -203,7 +203,7 @@
 
         function logout() {
             sessionStorage.removeItem("LoggedInUser");
-            window.location.href = "/login.html";
+            window.location.href = "/";
         }
 
         async function uploadFile() {
@@ -218,7 +218,7 @@
             
             if (!userData || !userData.username) {
                 alert("User session expired. Please login again.");
-                window.location.href = "/login.html";
+                window.location.href = "/";
                 return;
             }
 
@@ -290,7 +290,7 @@
         // Check if user is logged in
         const userData = JSON.parse(sessionStorage.getItem("LoggedInUser"));
         if (!userData || !userData.username) {
-            window.location.href = "/login.html";
+            window.location.href = "/";
         } else {
             displayUserInfo(userData);
         }

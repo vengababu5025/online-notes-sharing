@@ -318,12 +318,12 @@
 
         function logout() {
             sessionStorage.removeItem("LoggedInUser");
-            window.location.href = "/login.html";
+            window.location.href = "/";
         }
 
         // Initialize the page
         if (!userData || !userData.details.department) {
-            window.location.href = "/login.html";
+            window.location.href = "/";
         } else {
             displayUserInfo();
             fetchUploadedFiles();

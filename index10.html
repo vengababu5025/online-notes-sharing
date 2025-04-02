@@ -317,12 +317,12 @@
 
         function logout() {
             sessionStorage.removeItem("LoggedInUser");
-            window.location.href = "/login.html";
+            window.location.href = "/";
         }
 
         // Initialize the page
         if (!userData || !userData.details.name) {
-            window.location.href = "/login.html";
+            window.location.href = "/";
         } else {
             displayUserInfo();
             fetchWishlist();
