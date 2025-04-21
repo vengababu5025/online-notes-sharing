@@ -206,7 +206,7 @@
 
         function logout() {
             sessionStorage.removeItem("LoggedInUser");
-            window.location.href = "/index.html";
+             window.location.href = "/online-notes-sharing/index.html";
         }
 
         async function uploadFile() {
@@ -221,7 +221,7 @@
             
             if (!userData || !userData.username) {
                 alert("User session expired. Please login again.");
-                window.location.href = "/index.html";
+                 window.location.href = "/online-notes-sharing/index.html";
                 return;
             }
 
@@ -293,7 +293,7 @@
         // Check if user is logged in
         const userData = JSON.parse(sessionStorage.getItem("LoggedInUser"));
         if (!userData || !userData.username) {
-            window.location.href = "/index.html";
+             window.location.href = "/online-notes-sharing/index.html";
         } else {
             displayUserInfo(userData);
         }
