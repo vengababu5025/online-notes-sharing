@@ -266,19 +266,19 @@
                 window.open(`https://vengababu.bsite.net/api/OnlineSharing/GetFile/${fileName}?user=${userData.details.name}`, '_blank');
             } else {
                 alert("User information not available. Please login again.");
-                window.location.href = "/";
+                 window.location.href = "/online-notes-sharing/index.html";
             }
         }
 
         function logout() {
             sessionStorage.removeItem("LoggedInUser");
-            window.location.href = "/index.html";
+           window.location.href = "/online-notes-sharing/index.html";
         }
 
         // Check if user is logged in and load data
         const userData = JSON.parse(sessionStorage.getItem("LoggedInUser"));
         if (!userData || !userData.username) {
-            window.location.href = "/index.html"; // Redirect to login if not logged in
+            window.location.href = "/online-notes-sharing/index.html";// Redirect to login if not logged in
         } else {
             displayUserInfo(userData);
             fetchUploadedFiles(userData.details.name);
