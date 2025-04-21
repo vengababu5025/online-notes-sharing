@@ -321,12 +321,12 @@
 
         function logout() {
             sessionStorage.removeItem("LoggedInUser");
-            window.location.href = "online-notes-sharing/index.html";
+            window.location.href = "/";
         }
 
         // Initialize the page
         if (!userData || !userData.details.department) {
-            window.location.href = "online-notes-sharing/index.html";
+            window.location.href = "/";
         } else {
             displayUserInfo();
             fetchUploadedFiles();
