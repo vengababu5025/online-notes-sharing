@@ -321,12 +321,12 @@
 
         function logout() {
             sessionStorage.removeItem("LoggedInUser");
-            window.location.href = "/index.html";
+            window.location.href = "../index.html";
         }
 
         // Initialize the page
         if (!userData || !userData.details.department) {
-            window.location.href = "/index.html";
+            window.location.href = "../index.html";
         } else {
             displayUserInfo();
             fetchUploadedFiles();
